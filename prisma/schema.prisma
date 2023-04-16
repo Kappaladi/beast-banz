@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"] 
+}
+
+datasource db {
+  provider = "mysql"
+
+  // temp solution, wait https://github.com/prisma/prisma/issues/15958
+  // url      = env("DATABASE_URL")
+  url      = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiI1ZkZ2bUJ6Q3hfWURDZndOU2VWY2ZwbGgzeG1PT3dzcUFuSGp5R1JnM3c1T3pOQmt6UHExRXBFMFJZWklfTHdzIiwiaG9zdCI6ImF3cy11cy1lYXN0LTEucHJpc21hLWRhdGEuY29tIiwicHJvamVjdElkIjoiY2xnZmd5YjdqMDF0bmkxZXdydTE5cnFpayIsImlhdCI6MTY4MTQxMTQzMX0.X5pwovzqCeWmTeD2KQ21U66efsgY7T6u_wN5jzd-wa8"
+}
+
+model Bans {
+  id            Int     @id @default(autoincrement())
+  user          String  @db.VarChar(32) 
+  user_avatar   String
+  reason        String  @db.VarChar(512) 
+  admin         String  @db.VarChar(32)
+  admin_avatar  String 
+  unban_date    Int     @db.UnsignedInt
+}
